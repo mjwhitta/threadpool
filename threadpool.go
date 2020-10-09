@@ -6,7 +6,10 @@ import (
 )
 
 // Task is a function pointer to be passed to Queue().
-type Task func(threadId int, data map[string]interface{})
+type Task func(threadId int, data ThreadData)
+
+// ThreadData is simple a map[string]interface{}.
+type ThreadData map[string]interface{}
 
 // ThreadPool is a struct containing all relevant metadata to maintain
 // a pool of threads.
@@ -51,11 +54,11 @@ func (tp *ThreadPool) Close() {
 }
 
 // Queue will add a task to the ThreadPool.
-func (tp *ThreadPool) Queue(task Task, scope map[string]interface{}) {
+func (tp *ThreadPool) Queue(task Task, scope ThreadData) {
 	// Notify that task is queued
 	tp.wg.Add(1)
 
-	go func(threadId int, data map[string]interface{}) {
+	go func(threadId int, data ThreadData) {
 		// Run task with ready thread
 		task(threadId, data)
 

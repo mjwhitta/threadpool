@@ -29,13 +29,19 @@ import (
 )
 
 func main() {
+    var e error
+    var pool *tp.ThreadPool
+
     // Create a threadpool with 10 worker threads
-    var pool = tp.New(10)
+    if pool, e = tp.New(10); e != nil {
+        panic(e)
+    }
+    defer pool.Close()
 
     // Queue 32 tasks
     for i := 0; i < 32; i++ {
         pool.Queue(
-            func(tid uint, data map[string]interface{}) {
+            func(tid int, data map[string]interface{}) {
                 fmt.Printf("%d - %d\n", tid, data["counter"].(int))
                 time.Sleep(time.Second)
             },

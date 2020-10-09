@@ -1,31 +1,53 @@
 package threadpool
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 // Task is a function pointer to be passed to Queue().
-type Task func(threadId uint, data map[string]interface{})
+type Task func(threadId int, data map[string]interface{})
 
 // ThreadPool is a struct containing all relevant metadata to maintain
 // a pool of threads.
 type ThreadPool struct {
-	pool chan uint
+	pool chan int
 	wg   *sync.WaitGroup
 }
 
 // New will return a pointer to a new ThreadPool instance of the
 // specified size.
-func New(size uint) *ThreadPool {
-	var i uint
-	var tp = &ThreadPool{
-		pool: make(chan uint, size),
+func New(size int) (*ThreadPool, error) {
+	var tp *ThreadPool
+	var wg = &sync.WaitGroup{}
+
+	if size <= 0 {
+		return nil, fmt.Errorf("Pool size must be >= 0")
+	}
+
+	// Initialize ThreadPool
+	tp = &ThreadPool{
+		pool: make(chan int, size),
 		wg:   &sync.WaitGroup{},
 	}
 
-	for i = 0; i < size; i++ {
-		tp.pool <- i + 1
+	// Fill pool with workers
+	wg.Add(size)
+	for i := 0; i < size; i++ {
+		go func(threadId int) {
+			tp.pool <- threadId
+			wg.Done()
+		}(i + 1)
 	}
+	wg.Wait()
 
-	return tp
+	return tp, nil
+}
+
+// Close will close the ThreadPool's chan preventing it from being
+// used further.
+func (tp *ThreadPool) Close() {
+	close(tp.pool)
 }
 
 // Queue will add a task to the ThreadPool.
@@ -33,7 +55,7 @@ func (tp *ThreadPool) Queue(task Task, scope map[string]interface{}) {
 	// Notify that task is queued
 	tp.wg.Add(1)
 
-	go func(threadId uint, data map[string]interface{}) {
+	go func(threadId int, data map[string]interface{}) {
 		// Run task with ready thread
 		task(threadId, data)
 

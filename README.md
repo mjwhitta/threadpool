@@ -41,11 +41,11 @@ func main() {
     // Queue 32 tasks
     for i := 0; i < 32; i++ {
         pool.Queue(
-            func(tid int, data map[string]interface{}) {
+            func(tid int, data tp.ThreadData) {
                 fmt.Printf("%d - %d\n", tid, data["counter"].(int))
                 time.Sleep(time.Second)
             },
-            map[string]interface{}{"counter": i},
+            tp.ThreadData{"counter": i},
         )
     }
 

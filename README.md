@@ -13,7 +13,8 @@ This Go module is a very simple threadpool implementation.
 Open a terminal and run the following:
 
 ```
-$ go get -u gitlab.com/mjwhitta/threadpool
+$ go get --ldflags="-s -w" --trimpath -u \
+    gitlab.com/mjwhitta/threadpool
 ```
 
 ## Usage

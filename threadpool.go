@@ -25,7 +25,7 @@ func New(size int) (*ThreadPool, error) {
 	var wg = &sync.WaitGroup{}
 
 	if size <= 0 {
-		return nil, fmt.Errorf("Pool size must be > 0")
+		return nil, fmt.Errorf("pool size must be > 0")
 	}
 
 	// Initialize ThreadPool

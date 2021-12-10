@@ -1,8 +1,9 @@
 package threadpool
 
 import (
-	"fmt"
 	"sync"
+
+	"gitlab.com/mjwhitta/errors"
 )
 
 // Task is a function pointer to be passed to Queue().
@@ -25,7 +26,7 @@ func New(size int) (*ThreadPool, error) {
 	var wg = &sync.WaitGroup{}
 
 	if size <= 0 {
-		return nil, fmt.Errorf("threadpool: pool size must be > 0")
+		return nil, errors.New("pool size must be greater than 0")
 	}
 
 	// Initialize ThreadPool

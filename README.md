@@ -2,7 +2,7 @@
 
 <a href="https://www.buymeacoffee.com/mjwhitta">🍪 Buy me a cookie</a>
 
-[![Go Report Card](https://goreportcard.com/badge/gitlab.com/mjwhitta/threadpool)](https://goreportcard.com/report/gitlab.com/mjwhitta/threadpool)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mjwhitta/threadpool)](https://goreportcard.com/report/github.com/mjwhitta/threadpool)
 
 ## What is this?
 
@@ -14,7 +14,7 @@ Open a terminal and run the following:
 
 ```
 $ go get --ldflags="-s -w" --trimpath -u \
-    gitlab.com/mjwhitta/threadpool
+    github.com/mjwhitta/threadpool
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ import (
     "fmt"
     "time"
 
-    tp "gitlab.com/mjwhitta/threadpool"
+    tp "github.com/mjwhitta/threadpool"
 )
 
 func main() {
@@ -57,4 +57,4 @@ func main() {
 
 ## Links
 
-- [Source](https://gitlab.com/mjwhitta/threadpool)
+- [Source](https://github.com/mjwhitta/threadpool)

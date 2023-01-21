@@ -3,7 +3,7 @@ package threadpool
 import (
 	"sync"
 
-	"gitlab.com/mjwhitta/errors"
+	"github.com/mjwhitta/errors"
 )
 
 // Task is a function pointer to be passed to Queue().

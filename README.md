@@ -1,8 +1,10 @@
 # ThreadPool
 
-[![Yum](https://img.shields.io/badge/-Buy%20me%20a%20cookie-blue?style=for-the-badge&logo=cookiecutter)](https://www.buymeacoffee.com/mjwhitta)
+[![Yum](https://img.shields.io/badge/-Buy%20me%20a%20cookie-blue?labelColor=grey&logo=cookiecutter&style=for-the-badge)](https://www.buymeacoffee.com/mjwhitta)
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/mjwhitta/threadpool)](https://goreportcard.com/report/github.com/mjwhitta/threadpool)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mjwhitta/threadpool?style=for-the-badge)](https://goreportcard.com/report/github.com/mjwhitta/threadpool)
+![Lines of code](https://img.shields.io/tokei/lines/github/mjwhitta/threadpool?style=for-the-badge)
+![License](https://img.shields.io/github/license/mjwhitta/threadpool?style=for-the-badge)
 
 ## What is this?
 
@@ -13,7 +15,7 @@ This Go module is a very simple threadpool implementation.
 Open a terminal and run the following:
 
 ```
-$ go get --ldflags="-s -w" --trimpath -u \
+$ go get --ldflags "-s -w" --trimpath -u \
     github.com/mjwhitta/threadpool
 ```
 

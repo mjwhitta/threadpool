@@ -9,8 +9,8 @@ import (
 // Task is a function pointer to be passed to Queue().
 type Task func(threadId int, data ThreadData)
 
-// ThreadData is simple a map[string]interface{}.
-type ThreadData map[string]interface{}
+// ThreadData is simple a map[string]any.
+type ThreadData map[string]any
 
 // ThreadPool is a struct containing all relevant metadata to maintain
 // a pool of threads.

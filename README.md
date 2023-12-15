@@ -7,7 +7,14 @@
 
 ## What is this?
 
-This Go module is a very simple threadpool implementation.
+This Go module is a very simple thread pool implementation. It may be
+a little non-traditional. Rather than a pool of identical worker
+threads waiting for data, this module sets the maximum number of
+active threads. Additionally, each active thread can do a completely
+different task, if desired.
+
+**Note:** Versions prior to v1.5.0 caused deadlock if tasks created
+sub-tasks.
 
 ## How to install
 

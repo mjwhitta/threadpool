@@ -34,6 +34,9 @@ func TestPool(t *testing.T) {
 		pool.Queue(
 			func(tid int, data tp.ThreadData) {
 				collector <- data["int"].(int)
+
+				// Queue an additional task to test for deadlock
+				pool.Queue(func(tid int, data tp.ThreadData) {}, nil)
 			},
 			tp.ThreadData{"int": i},
 		)

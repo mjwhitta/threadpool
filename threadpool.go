@@ -59,7 +59,11 @@ func (tp *ThreadPool) Queue(task Task, scope ThreadData) {
 	// Notify that task is queued
 	tp.wg.Add(1)
 
-	go func(threadId int, data ThreadData) {
+	// Technically this will create a new thread for each task, but
+	// the thread will wait until the pool is ready to run
+	go func(data ThreadData) {
+		var threadId int = <-tp.pool // Grab the next ready thread
+
 		// Run task with ready thread
 		task(threadId, data)
 
@@ -68,7 +72,7 @@ func (tp *ThreadPool) Queue(task Task, scope ThreadData) {
 
 		// Notify when finished
 		tp.wg.Done()
-	}(<-tp.pool, scope) // Grab the next ready thread
+	}(scope)
 }
 
 // Wait will block until the ThreadPool has finished it's tasks.

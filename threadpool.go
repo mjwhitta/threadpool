@@ -23,7 +23,7 @@ type ThreadPool struct {
 // specified size.
 func New(size int) (*ThreadPool, error) {
 	var tp *ThreadPool
-	var wg = &sync.WaitGroup{}
+	var wg *sync.WaitGroup = &sync.WaitGroup{}
 
 	if size <= 0 {
 		return nil, errors.New("pool size must be greater than 0")

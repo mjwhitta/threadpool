@@ -15,7 +15,7 @@ func TestEmptyPool(t *testing.T) {
 }
 
 func TestPool(t *testing.T) {
-	var collected = map[int]struct{}{}
+	var collected map[int]struct{} = map[int]struct{}{}
 	var collector chan int
 	var e error
 	var pool *tp.ThreadPool

@@ -1,4 +1,4 @@
 package threadpool
 
 // Version is the package version
-const Version = "1.5.2"
+const Version string = "1.5.3"

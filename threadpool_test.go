@@ -30,7 +30,7 @@ func TestPool(t *testing.T) {
 	assert.NotNil(t, pool)
 
 	// Queue 10 tasks
-	for i := 0; i < psz; i++ {
+	for i := range psz {
 		pool.Queue(
 			func(tid int, data tp.ThreadData) {
 				collector <- data["int"].(int)

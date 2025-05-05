@@ -37,7 +37,7 @@ func New(size int) (*ThreadPool, error) {
 
 	// Fill pool with workers
 	wg.Add(size)
-	for i := 0; i < size; i++ {
+	for i := range size {
 		go func(threadId int) {
 			tp.pool <- threadId
 			wg.Done()

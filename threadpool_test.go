@@ -1,3 +1,4 @@
+//nolint:godoclint // These are tests
 package threadpool_test
 
 import (
@@ -11,7 +12,7 @@ func TestEmptyPool(t *testing.T) {
 	var e error
 
 	_, e = tp.New(0)
-	assert.NotNil(t, e)
+	assert.Error(t, e)
 }
 
 func TestPool(t *testing.T) {
@@ -26,14 +27,16 @@ func TestPool(t *testing.T) {
 
 	// Create ppool
 	pool, e = tp.New(psz)
-	assert.Nil(t, e)
+	assert.NoError(t, e)
 	assert.NotNil(t, pool)
 
 	// Queue 10 tasks
 	for i := range psz {
 		pool.Queue(
 			func(tid int, data tp.ThreadData) {
-				collector <- data["int"].(int)
+				if i, ok := data["int"].(int); ok {
+					collector <- i
+				}
 
 				// Queue an additional task to test for deadlock
 				pool.Queue(func(tid int, data tp.ThreadData) {}, nil)
@@ -54,5 +57,5 @@ func TestPool(t *testing.T) {
 	}
 
 	// Validate they are all unique values
-	assert.Equal(t, psz, len(collected))
+	assert.Len(t, collected, psz)
 }

@@ -58,4 +58,7 @@ func TestPool(t *testing.T) {
 
 	// Validate they are all unique values
 	assert.Len(t, collected, psz)
+
+	// Close pool
+	pool.Close()
 }
